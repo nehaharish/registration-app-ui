@@ -1,12 +1,37 @@
 <template>
-  <div id="app">
-    <div id="nav">
+   <v-app>
+     <div>
+    <v-toolbar
+      dark
+      prominent
+      src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
+    >
+      <v-spacer></v-spacer>
+      <h1 class="pt-8"> Login and Registration Form</h1>
+      <v-spacer></v-spacer>
+      <v-btn text @click="$router.push({ path: '/login' })">Login</v-btn>
+      <v-btn text @click="logout()">Logout</v-btn>
+    </v-toolbar>
+  </div>
+
+    <div id="nav" class="mt-5">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/login">Login</router-link>
     </div>
     <router-view/>
-  </div>
+   </v-app>
 </template>
+
+<script>
+export default {
+  methods: {
+    async logout() {
+      await this.$store.dispatch('logout');
+      if (this.$route.path !== '/login') this.$router.push({ path: '/login' });
+    },
+  },
+};
+</script>
 
 <style>
 #app {
@@ -15,6 +40,8 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-color: rgb(226, 226, 214);
+  height:100%
 }
 
 #nav {
